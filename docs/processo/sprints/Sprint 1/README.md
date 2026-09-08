@@ -31,7 +31,7 @@
     </tr>
     <tr>
       <td><strong>Meta da Sprint</strong></td>
-      <td>Construir o pipeline inicial de entrada: cadastro de datasets territoriais, upload seguro na Zona Bruta com hash SHA-256, checagem de erros com desvio para Quarentena e acompanhamento das etapas pelo Apache Airflow.</td>
+      <td>User Stories de rank 1, rank 2, e rank 3 (total de 21 Story Points).</td>
     </tr>
     <tr>
       <td><strong>Período</strong></td>
