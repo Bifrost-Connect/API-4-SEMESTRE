@@ -385,6 +385,11 @@ georural-datahub/
 
 ---
 
+<h2> # 📝 Padrão de Commits </h2>
+<img src="docs/img/commit_structure.png">
+
+---
+
 <h2 id="membros">👥 Membros da Equipe</h2>
 
 | Foto | Nome | Função no Projeto | GitHub | LinkedIn |
