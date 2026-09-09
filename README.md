@@ -241,7 +241,7 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
       <td><strong>Sprint 1</strong></td>
       <td>Épico 1: Ingestão, Quarentena e Orquestração do Fluxo</td>
       <td>Cadastro de Datasets/Fontes, Upload na Zona Bruta com Hash SHA-256, Motor de Validação com Desvio para Quarentena e Monitoramento de DAGs no Airflow.</td>
-      <td><a href="./docs/processo/sprints/Sprint_1.md">📂 Ver Sprint 1</a></td>
+      <td><a href="./docs/processo/sprints/Sprint 1">📂 Ver Sprint 1</a></td>
     </tr>
     <tr>
       <td><strong>Sprint 2</strong></td>
