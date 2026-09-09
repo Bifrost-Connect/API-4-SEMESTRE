@@ -247,13 +247,13 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
       <td><strong>Sprint 2</strong></td>
       <td>Épico 2: Análise Espacial, Rastreabilidade e Versionamento</td>
       <td>Linhagem do Indicador ponta a ponta, Cruzamento Territorial (CAR vs. Alertas/APPs), Fechamento de Versões Imutáveis e Mapa Interativo com Leaflet.</td>
-      <td><a href="./docs/processo/sprints/Sprint_2.md">📂 Ver Sprint 2</a></td>
+      <td><a href="./docs/processo/sprints/Sprint 2">📂 Ver Sprint 2</a></td>
     </tr>
     <tr>
       <td><strong>Sprint 3</strong></td>
       <td>Épico 3: Inteligência, Portabilidade e Governança</td>
       <td>Catálogo Completo de Datasets, Comparação Temporal entre Versões (Chart.js), Exportação Estruturada (CSV/GeoJSON), API Keys e Gestão de Perfis de Usuários.</td>
-      <td><a href="./docs/processo/sprints/Sprint_3.md">📂 Ver Sprint 3</a></td>
+      <td><a href="./docs/processo/sprints/Sprint 3">📂 Ver Sprint 3</a></td>
     </tr>
   </tbody>
 </table>
