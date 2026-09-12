@@ -1,0 +1,440 @@
+# Definition of Ready (DoR) - Backlog Completo do GeoRural DataHub
+
+Documento de especificação funcional, modelo de dados e mensagens do sistema para todas as 13 User Stories do produto, divididas entre as três Sprints do projeto[cite: 1, 2].
+
+---
+
+## 📌 SPRINT 1: Ingestão, Quarentena e Orquestração do Fluxo
+
+---
+
+### US-01 - Cadastro de Origem e Metadados Territoriais
+
+**Como** operador de dados, **quero** cadastrar os dados de origem de uma base territorial (órgão, ano e sistema de coordenadas), **para** que a procedência e a safra utilizada sejam registradas desde a entrada[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve permitir o cadastro de novas fontes e bases de dados geoespaciais antes do envio dos arquivos físicos[cite: 1].
+* **Campos Obrigatórios:**
+  * Nome do Dataset: texto obrigatório, mínimo 3 caracteres.
+  * Órgão Emissor: seleção obrigatória em lista pré-configurada (INCRA, IBAMA, MapBiomas, SICAR) ou preenchimento de novo órgão.
+  * Ano da Safra: numérico de 4 dígitos, maior ou igual a 2000 e menor ou igual ao ano corrente.
+  * Sistema de Coordenadas de Referência (CRS/SRID): seleção obrigatória (padrão Brasil: `SIRGAS 2000 / EPSG:4674` ou global `WGS 84 / EPSG:4326`)[cite: 1].
+* **Geração de Identificador:** Todo cadastro homologado deve gerar uma chave única sequencial ou UUID no Oracle para vincular as cargas posteriores[cite: 1, 4].
+* **Bloqueio de Duplicidade:** O sistema não deve permitir o cadastro de duas bases ativas com mesmo nome, mesmo órgão e mesmo ano de referência.
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Dataset:** UUID / `NUMBER`, chave primária, gerado automaticamente[cite: 1, 4].
+* **Nome Base:** `VARCHAR2(100)`, obrigatório, não nulo.
+* **Órgão Emissor:** `VARCHAR2(50)`, obrigatório.
+* **Ano Safra:** `NUMBER(4)`, inteiro positivo, obrigatório.
+* **Código EPSG:** `NUMBER(6)`, numérico positivo, obrigatório.
+* **Data/Hora Cadastro:** `TIMESTAMP`, preenchimento automático pelo sistema.
+* **Operador Responsável:** `VARCHAR2(100)`, capturado da sessão logada[cite: 1, 2].
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Base territorial [Nome da Base] cadastrada com sucesso!"
+  * "Metadados registrados sob o identificador [ID_DATASET]."
+* **Erro:**
+  * "Erro ao cadastrar: Já existe uma base cadastrada com este nome para este órgão e safra."
+  * "Sistema de coordenadas (EPSG) inválido ou não suportado."
+* **Aviso:**
+  * "Atenção: A alteração do sistema de coordenadas após a carga exigirá reprojeção cartográfica."
+
+---
+
+### US-02 - Ingestão e Preservação do Arquivo Original na Zona Bruta
+
+**Como** operador de dados, **quero** fazer upload de arquivos preservando o documento original intacto na Zona Bruta, **para** garantir a retenção da fonte primária para auditorias e consultas históricas[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve permitir o upload de arquivos geoespaciais vinculados a um Dataset cadastrado na US-01[cite: 1].
+* **Preservação Original:** O arquivo físico recebido deve ser armazenado de forma íntegra e idêntica à fonte na Zona Bruta, sem renomeação interna ou conversão estrutural prévia[cite: 1, 4].
+* **Imutabilidade de Entrada:** Uma vez persistido na Zona Bruta, o arquivo não pode ser editado, excluído ou sobrescrito pela interface[cite: 1, 4].
+* **Extensões Suportadas:** Validação obrigatória de pacotes Shapefile compactados (`.zip` contendo `.shp`, `.shx`, `.dbf`, `.prj`), `.geojson` e `.kml`.
+* **Registro de Auditoria de Carga:** O sistema deve registrar caminho de armazenamento (URI), tamanho em bytes, quantidade de feições e identificador da sessão[cite: 1, 4].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Ingestão:** UUID / `NUMBER`, chave primária[cite: 1].
+* **ID Dataset:** chave estrangeira referenciando a tabela de Datasets (US-01), obrigatório[cite: 1].
+* **Nome Arquivo Original:** `VARCHAR2(255)`, obrigatório, mantendo extensão original.
+* **Tamanho Arquivo (Bytes):** `NUMBER(14)`, numérico positivo, obrigatório.
+* **Caminho Storage (URI):** `VARCHAR2(500)`, endereço físico do arquivo na Zona Bruta[cite: 1, 4].
+* **Status Ingestão:** lista (`RECEBIDO`, `ARMAZENADO`, `FALHA_ARMAZENAMENTO`), obrigatório.
+* **Data/Hora Ingestão:** `TIMESTAMP`, preenchimento automático.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Upload concluído! Arquivo original armazenado na Zona Bruta sob o protocolo [ID_INGESTAO]."[cite: 1]
+* **Erro:**
+  * "Formato inválido. Envie arquivos compactados (.ZIP com Shapefile), .GeoJSON ou .KML."
+  * "Falha no armazenamento: Não foi possível gravar o arquivo físico na Zona Bruta."[cite: 1]
+  * "Tamanho do arquivo excede o limite máximo permitido de 500 MB."
+* **Aviso:**
+  * "O arquivo original permanecerá intacto na Zona Bruta para fins de rastreabilidade regulatória."[cite: 1]
+
+---
+
+### US-03 - Triagem e Desvio para Quarentena
+
+**Como** operador de dados, **quero** um filtro automático que desvie dados com erro para uma área de quarentena, **para** impedir que cadastros duplicados ou geometrias quebradas contaminem a base tratada[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve processar o arquivo bruto e aplicar checagens de integridade geométrica e semântica antes de promover os dados para a camada seguinte[cite: 1].
+* **Critérios de Rejeição e Desvio:**
+  * Geometrias inválidas: anéis abertos, polígonos autointersectados, coordenadas nulas ou polígonos degenerados.
+  * Duplicidade cadastral: registros com mesmo código identificador (ex.: mesmo código de CAR) dentro da mesma base.
+  * Ausência de atributos obrigatórios da fonte.
+* **Princípio do Isolamento:** Registros com inconsistências devem ser segregados na Zona de Quarentena sem abortar a ingestão dos registros válidos[cite: 1, 4].
+* **Persistência do Registro Defeituoso:** Cada registro em quarentena deve guardar o motivo explícito da rejeição e a cópia íntegra dos dados originais para conferência[cite: 1, 4].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Quarentena:** UUID / `NUMBER`, chave primária[cite: 1].
+* **ID Ingestão:** chave estrangeira referenciando o arquivo bruto original (US-02), obrigatório[cite: 1].
+* **Código Registro:** `VARCHAR2(100)`, identificador de negócio extraído (ex.: código CAR), quando legível.
+* **Tipo Inconsistência:** lista (`GEOMETRIA_INVALIDA`, `CADASTRO_DUPLICADO`, `CAMPO_OBRIGATORIO_NULO`), obrigatório.
+* **Motivo Rejeição:** `VARCHAR2(1000)`, texto detalhando a falha detectada[cite: 1, 4].
+* **Dado Bruto Original:** `CLOB` / `JSON`, payload textual da feição rejeitada[cite: 1, 4].
+* **Data/Hora Segregação:** `TIMESTAMP`, preenchimento automático.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Triagem concluída: [X] feições validadas e [Y] registros desviados para a Quarentena."[cite: 1]
+* **Erro:**
+  * "Estrutura do arquivo corrompida. Não foi possível realizar a leitura das feições vetoriais."[cite: 1]
+* **Aviso:**
+  * "Foram identificadas inconsistências em [Y] registros. Eles foram retidos na Quarentena para análise técnica."[cite: 1]
+
+---
+
+### US-04 - Monitoramento Operacional da Esteira
+
+**Como** operador de dados, **quero** acompanhar visualmente na tela as etapas do processamento, **para** identificar rapidamente o status das cargas e onde ocorreram eventuais falhas operacionais[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* A aplicação deve exibir uma linha do tempo (timeline de esteira) sincronizada com o status das etapas de ingestão e triagem[cite: 1].
+* **Etapas Monitoradas Obrigatórias:**
+  1. Recepção e Armazenamento na Zona Bruta[cite: 1, 4].
+  2. Validação Estrutural e Filtro de Quarentena[cite: 1, 4].
+  3. Carga e Indexação na Zona Tratada[cite: 1, 4].
+  4. Finalização do Pipeline[cite: 1].
+* **Estados Possíveis:** Cada nó da esteira deve apresentar o estado `PENDENTE`, `PROCESSANDO`, `CONCLUIDO` ou `FALHA`.
+* **Exibição de Falha:** Caso ocorra travamento ou interrupção de infraestrutura, a interface deve indicar o passo exato da parada e o log resumido do erro[cite: 1].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Execução:** `VARCHAR2(100)`, chave primária identificadora do pipeline[cite: 1].
+* **ID Ingestão:** chave estrangeira referenciando o arquivo correspondente, obrigatório[cite: 1].
+* **Etapa Vigente:** lista (`ARMAZENAMENTO_BRUTO`, `VALIDACAO_QUARENTENA`, `ZONA_TRATADA`, `FINALIZADO`), obrigatório[cite: 1, 4].
+* **Status Execução:** lista (`EM_ANDAMENTO`, `SUCESSO`, `FALHA`), obrigatório.
+* **Log Técnico:** `CLOB`, mensagens de log e pilha de exceção em caso de erro.
+* **Timestamp Início:** `TIMESTAMP`, preenchimento automático.
+* **Timestamp Fim:** `TIMESTAMP`, nulo enquanto a esteira estiver ativa.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Pipeline finalizado com sucesso! Todos os dados válidos estão prontos para consulta."[cite: 1]
+* **Erro:**
+  * "Execução interrompida na etapa [Nome da Etapa]. Consulte os logs operacionais."[cite: 1]
+  * "Falha de comunicação ao sincronizar o estado da esteira de processamento."[cite: 1]
+* **Aviso:**
+  * "Processamento em andamento. A tela atualizará o progresso periodicamente."[cite: 1]
+
+---
+
+## 📌 SPRINT 2: Análise Espacial, Rastreabilidade e Versionamento
+
+---
+
+### US-05 - Consulta de Linhagem e Rastreabilidade do Indicador
+
+**Como** auditor ambiental, **quero** consultar a linhagem de um indicador até o arquivo original de origem, **para** responder auditorias externas comprovando quais versões e regras geraram o cálculo[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve exibir visualmente e em dados a linhagem retrospectiva completa de qualquer indicador publicado[cite: 1].
+* **Dados Obrigatórios da Trilha:**
+  * Indicador final homologado.
+  * Versão da regra de cruzamento territorial aplicada.
+  * Arquivo bruto original da Zona Bruta (nome, data de carga, tamanho e ID de ingestão)[cite: 1, 4].
+  * Relatório de quantos registros daquela base foram aprovados e quantos foram retidos na quarentena[cite: 1, 4].
+* **Perfil de Acesso:** Consulta disponível para os perfis Auditor, Analista e Gestor[cite: 1, 2].
+* **Somente Leitura:** A tela de linhagem não permite qualquer edição ou remoção de dados[cite: 1, 2].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Linhagem:** UUID / `NUMBER`, chave primária.
+* **ID Indicador:** chave estrangeira para o indicador consolidado, obrigatório[cite: 1].
+* **ID Ingestão Origem:** chave estrangeira para a carga de origem na Zona Bruta, obrigatório[cite: 1, 4].
+* **Versão Algoritmo:** `VARCHAR2(20)`, versão do script ou procedure de cálculo espacial.
+* **Data Execução Cálculo:** `TIMESTAMP`, preenchimento automático.
+* **Auditor Responsável Consulta:** `VARCHAR2(100)`, registrado em log de auditoria[cite: 1, 2].
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Trilha de linhagem carregada com sucesso para o indicador [ID_INDICADOR]."[cite: 1]
+* **Erro:**
+  * "Indicador não encontrado ou registro de linhagem inconsistente."[cite: 1]
+  * "Acesso negado: Perfil sem permissão para acessar relatórios de auditoria e linhagem."[cite: 1]
+* **Aviso:**
+  * "As fontes consultadas representam o estado exato dos dados na data de processamento."[cite: 1]
+
+---
+
+### US-06 - Cálculo Automático de Sobreposição (CAR vs. Alertas/APPs)
+
+**Como** analista territorial, **quero** calcular automaticamente a sobreposição entre imóveis rurais (CAR) e áreas com alertas ambientais, **para** eliminar a morosidade e as falhas do cálculo manual em laudos de regularidade[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O cálculo espacial deve ser executado no banco relacional via rotinas geométricas sobre as bases limpas da Zona Tratada[cite: 1, 4].
+* **Operação Espacial:** Realizar a intersecção geográfica entre o polígono do imóvel (CAR) e as camadas de restrição (Alertas de Desmatamento, Reserva Legal e APP)[cite: 1].
+* **Métricas Mandatórias:**
+  * Área do Imóvel Rural (em hectares - ha).
+  * Área Total Sobreposta de Alertas/Restrições (em hectares - ha).
+  * Percentual de Comprometimento: (Área Sobreposta / Área Total) * 100.
+* **Precisão Mínima:** Os cálculos métricos de área devem conter precisão de até 4 casas decimais.
+* **Isolamento de Erro:** Caso um polígono específico apresente erro de cálculo topológico durante o lote, ele deve ser marcado com status de falha analítica sem cancelar os demais cálculos.
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Cálculo:** UUID / `NUMBER`, chave primária.
+* **Código CAR:** `VARCHAR2(100)`, código federal do imóvel rural, obrigatório.
+* **Área Imóvel (ha):** `NUMBER(12,4)`, numérico decimal positivo, obrigatório.
+* **Área Sobreposta (ha):** `NUMBER(12,4)`, numérico decimal positivo ou zero, obrigatório.
+* **Percentual Sobreposição:** `NUMBER(5,2)`, decimal de 0 a 100, preenchimento automático.
+* **Geometria Intersecção:** `SDO_GEOMETRY`, polígono resultante da intersecção espacial.
+* **Data/Hora Processamento:** `TIMESTAMP`, preenchimento automático.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Cálculo espacial concluído! [X] imóveis processados com métricas de sobreposição geradas."[cite: 1]
+* **Erro:**
+  * "Falha ao processar cálculo espacial: Coordenadas inválidas ou projeção geométrica incompatível."[cite: 1]
+  * "Não existem bases de alertas vigentes na Zona Tratada para a safra informada."[cite: 1]
+* **Aviso:**
+  * "Foram identificadas sobreposições críticas superiores a 20% da área do imóvel rural em [X] cadastros."[cite: 1]
+
+---
+
+### US-07 - Fechamento e Congelamento de Versões Imutáveis de Indicadores
+
+**Como** gestor de dados, **quero** fechar e proteger versões oficiais de indicadores impedindo edições, **para** assegurar que relatórios e laudos emitidos possam ser reconstituídos fielmente a qualquer momento[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve possibilitar a consolidação de um lote de indicadores calculados em uma "Versão Oficial/Safra Homologada"[cite: 1].
+* **Imutabilidade Absoluta:** Uma vez fechada a versão, nenhuma linha de indicador pertencente a essa versão pode ser atualizada (`UPDATE`) ou deletada (`DELETE`), nem mesmo por administradores[cite: 1, 4].
+* **Controle de Bloqueio:** O bloqueio deve ser aplicado via restrição de banco (triggers/status `CONGELADO`)[cite: 1, 4].
+* **Novas Safras:** Se correções forem necessárias, o sistema deve obrigar a criação de uma nova versão identificada (ex.: Versão 1.1 ou Versão 2.0), mantendo a versão anterior intacta[cite: 1].
+* **Autorização:** Apenas usuários com perfil **Gestor de Dados** podem homologar e trancar versões[cite: 1, 2].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Versão Indicador:** UUID / `NUMBER`, chave primária.
+* **Código Versão:** `VARCHAR2(20)`, formato padrão (ex: `v2026.1`, `v1.0.0`), único, obrigatório.
+* **Safra Referência:** `NUMBER(4)`, ano de referência dos dados, obrigatório.
+* **Status Versão:** lista (`EM_ABERTO`, `HOMOLOGADA_CONGELADA`), obrigatório.
+* **Quantidade Imóveis Consolidados:** `NUMBER(8)`, inteiro positivo.
+* **Gestor Responsável:** `VARCHAR2(100)`, capturado da sessão do usuário logado[cite: 1, 2].
+* **Data/Hora Congelamento:** `TIMESTAMP`, preenchimento automático no momento do fechamento.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Versão [Código Versão] homologada e congelada com sucesso! Os indicadores tornaram-se imutáveis."[cite: 1]
+* **Erro:**
+  * "Operação rejeitada: A versão selecionada já se encontra congelada e não permite alterações."[cite: 1]
+  * "Acesso negado: Apenas o perfil Gestor pode homologar e trancar versões oficiais."[cite: 1, 2]
+* **Aviso:**
+  * "Atenção: O congelamento desta versão impedirá qualquer alteração futura sobre os indicadores calculados."[cite: 1]
+
+---
+
+### US-08 - Visualização Cartográfica em Mapa Interativo
+
+**Como** analista territorial, **quero** ver o traçado dos imóveis e alertas sobrepostos em um mapa interativo, **para** inspecionar anomalias geográficas sem depender de softwares desktop pesados[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve renderizar um mapa dinâmico na interface web (via Leaflet) consumindo as camadas da Zona Publicada/Tratada[cite: 1, 4].
+* **Controle de Camadas (Layers):** O usuário deve poder alternar a visibilidade de cada camada de forma independente:
+  * Camada de Imóveis Rurais (CAR) - contorno verde/cinza.
+  * Camada de Alertas Ambientais/Desmatamento - contorno vermelho.
+  * Camada da Área de Intersecção (Sobreposição) - hachura amarela/laranja.
+* **Inspeção de Feição (Popup/Sidebar):** Ao clicar sobre um polígono, o mapa deve abrir um painel exibindo código do CAR, área total, área sobreposta e ano da safra.
+* **Navegação:** O mapa deve dispor de controles de zoom, centralização automática na feição selecionada e mapa base (satélite/topográfico).
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **Camada/Estilo:** metadados de configuração salvos no cliente (cores hexadecimais, opacidade de 0 a 1).
+* **Payload Vetorial:** `GeoJSON` de polígonos/multipolígonos entregues via API REST sob demanda (filtrados por bounding box).
+* **Parâmetros de Exibição:** `SRID: 4326` para projeção cartográfica padrão de telas web.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Camadas espaciais carregadas no mapa com sucesso."[cite: 1]
+* **Erro:**
+  * "Erro ao renderizar mapa: Feição vetorial com formato geométrico inválido."[cite: 1]
+  * "Falha ao carregar camada de sobreposições territoriais."[cite: 1]
+* **Aviso:**
+  * "Muitas feições selecionadas para a visualização. Aplique filtros para otimizar o desempenho do mapa."[cite: 1]
+
+---
+
+## 📌 SPRINT 3: Inteligência, Portabilidade e Governança
+
+---
+
+### US-09 - Catálogo Geral de Datasets e Situação Operacional
+
+**Como** analista de dados, **quero** consultar um catálogo com todas as bases disponíveis e sua situação operacional, **para** identificar rapidamente quais conjuntos de dados estão vigentes e prontos para uso[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve fornecer uma visão de catálogo centralizado de todos os datasets registrados na plataforma[cite: 1].
+* **Filtros Obrigatórios:** Busca por Órgão Emissor, Safra/Ano, Tipo de Dado (CAR, Alerta, APP) e Situação da Base[cite: 1].
+* **Status Operacional dos Datasets:**
+  * `DISPONIVEL`: Dados tratados e com versão publicada apta para consumo[cite: 1].
+  * `EM_PROCESSAMENTO`: Arquivos em fase de triagem ou cálculo analítico[cite: 1].
+  * `PENDENTE_HOMOLOGACAO`: Cálculos concluídos aguardando congelamento do Gestor[cite: 1].
+  * `ARQUIVADO`: Safra antiga descontinuada[cite: 1].
+* **Resumo Informativo:** Cada card/linha do catálogo deve exibir o volume de feições válidas, feições descartadas na quarentena e data da última carga[cite: 1].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Catálogo:** UUID / `NUMBER`, chave primária.
+* **ID Dataset:** chave estrangeira para o Dataset, obrigatório[cite: 1].
+* **Situação Operacional:** lista pré-definida de status, obrigatório.
+* **Total Registros Aprovados:** `NUMBER(9)`, inteiro positivo.
+* **Total Registros Quarentenados:** `NUMBER(9)`, inteiro positivo ou zero.
+* **Data Última Atualização:** `TIMESTAMP`, preenchimento automático.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Catálogo de dados sincronizado."[cite: 1]
+* **Erro:**
+  * "Não foi possível carregar os índices do catálogo de dados."[cite: 1]
+* **Aviso:**
+  * "Existem [X] datasets pendentes de homologação de safra pelo gestor."[cite: 1]
+
+---
+
+### US-10 - Comparação Temporal de Safras Lado a Lado
+
+**Como** analista territorial, **quero** comparar duas safras de dados de uma mesma região lado a lado, **para** avaliar visualmente e numericamente a evolução temporal das áreas sobrepostas ao longo dos anos[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O usuário deve selecionar duas safras distintas homologadas (ex.: Safra 2023 vs. Safra 2024) para o mesmo território ou conjunto de imóveis[cite: 1].
+* **Painel Comparativo Dividido:** Interface apresentando gráficos comparativos (Chart.js) e mapa dividido (split view ou alternância instantânea)[cite: 1, 4].
+* **Métricas de Variação:**
+  * Diferença em hectares de sobreposição: Área_SafraB - Área_SafraA.
+  * Percentual de aumento ou redução de área irregular desmatada/sobreposta.
+  * Novos imóveis que entraram em conformidade ou inconformidade.
+* **Trava de Comparação:** Não permitir a comparação se o usuário selecionar a mesma safra em ambos os seletores.
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Comparação:** UUID / `NUMBER`, registro de auditoria temporário de consulta.
+* **Safra A (Referência):** `NUMBER(4)`, obrigatório.
+* **Safra B (Comparada):** `NUMBER(4)`, obrigatório, deve ser diferente de Safra A.
+* **Variação Total Hectares:** `NUMBER(12,4)`, numérico decimal (pode ser positivo ou negativo).
+* **Percentual Crescimento:** `NUMBER(6,2)`, decimal relativo.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Comparativo temporal processado com sucesso para as safras [Ano A] e [Ano B]."[cite: 1]
+* **Erro:**
+  * "Seleção inválida: As safras comparadas devem ser distintas."
+  * "Dados insuficientes na safra [Ano] para gerar o comparativo regional."[cite: 1]
+* **Aviso:**
+  * "A safra [Ano] possui registros com diferenças de projeção cartográfica; os valores foram harmonizados."[cite: 1]
+
+---
+
+### US-11 - Exportação Estruturada de Dados (CSV / GeoJSON)
+
+**Como** gestor ambiental, **quero** baixar os resultados dos laudos em planilhas (CSV) ou arquivos vetoriais (GeoJSON), **para** emitir pareceres externos e integrar dados com outras áreas da empresa[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve possibilitar a exportação de qualquer versão oficial de indicadores publicada[cite: 1].
+* **Formatos de Saída Suportados:**
+  * Formato Tabela: `.csv` delimitado por ponto e vírgula (`;`), com cabeçalhos padronizados (Código CAR, Área Imóvel, Área Sobreposta, % Comprometido, Data Homologação).
+  * Formato Vetorial: `.geojson`, contendo os atributos analíticos e as coordenadas geográficas dos polígonos de sobreposição.
+* **Integridade do Relatório:** Apenas dados oriundos da Zona Publicada (versões homologadas e imutáveis) podem ser exportados, garantindo confiabilidade jurídica ao laudo[cite: 1, 4].
+* **Registro de Exportação:** Registrar em log de auditoria quem realizou o download, qual versão foi extraída e a data/hora do evento[cite: 1, 2].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Log Exportação:** UUID / `NUMBER`, chave primária de auditoria.
+* **ID Versão:** chave estrangeira referenciando a versão oficial exportada, obrigatório[cite: 1].
+* **Formato Exportado:** lista (`CSV`, `GEOJSON`), obrigatório.
+* **Quantidade Linhas/Feições:** `NUMBER(8)`, inteiro positivo.
+* **Usuário Solicitante:** `VARCHAR2(100)`, capturado da sessão[cite: 1, 2].
+* **Data/Hora Download:** `TIMESTAMP`, preenchimento automático.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Arquivo de exportação [Nome_Arquivo] gerado com sucesso!"
+  * "Download iniciado: [X] registros exportados no formato [CSV/GeoJSON]."[cite: 1]
+* **Erro:**
+  * "Erro ao gerar arquivo de exportação. Tente selecionar um volume menor de registros."[cite: 1]
+  * "Acesso negado: Registros em quarentena ou rascunho não podem ser exportados como laudos oficiais."[cite: 1]
+* **Aviso:**
+  * "A extração vetorial completa pode levar alguns instantes dependendo da complexidade dos polígonos."[cite: 1]
+
+---
+
+### US-12 - Gerenciamento de Chaves de Acesso (API Keys)
+
+**Como** analista ou integrador externo, **quero** gerar chaves de acesso com opção de revogação imediata, **para** integrar sistemas externos de forma segura sem compartilhar senhas individuais[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve fornecer um painel seguro para geração, renovação e exclusão de tokens de autenticação (API Keys)[cite: 1].
+* **Exibição Única do Token:** A chave secreta gerada deve ser mostrada na íntegra ao usuário apenas uma única vez na tela no momento da criação. O banco deve armazenar apenas o identificador e o hash da chave.
+* **Revogação Instantânea:** O usuário ou o administrador pode clicar em "Revogar Chave", bloqueando imediatamente o acesso de qualquer integração que utilize aquele token.
+* **Data de Validade (Expiração):** Toda API Key deve ter obrigatoriamente um prazo limite de vigência configurável (30, 60, 90 dias ou 1 ano).
+* **Restrição de Permissão:** A chave herda os privilégios estritos de consumo (somente leitura na Zona Publicada)[cite: 1, 4].
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID API Key:** UUID, chave primária.
+* **Identificador Público (Key ID):** `VARCHAR2(32)`, público, obrigatório.
+* **Hash Segredo Token:** `CHAR(64)`, obrigatório (segredo armazenado de forma criptografada).
+* **Nome Identificador Aplicação:** `VARCHAR2(100)`, texto obrigatório (ex: "Integração ERP Crédito").
+* **Data Expiração:** `TIMESTAMP`, obrigatório.
+* **Status Chave:** lista (`ATIVA`, `REVOGADA`, `EXPIRADA`), obrigatório.
+* **Usuário Proprietário:** `VARCHAR2(100)`, obrigatório[cite: 1, 2].
+* **Data Criação:** `TIMESTAMP`, preenchimento automático.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "API Key gerada com sucesso! Copie sua chave agora, ela não será exibida novamente."
+  * "A chave [Nome Identificador] foi revogada. O acesso externo foi encerrado imediatamente."
+* **Erro:**
+  * "Chave de API inválida, revogada ou expirada."
+  * "Limite de chaves de acesso ativas por usuário atingido."
+* **Aviso:**
+  * "Atenção: Não compartilhe esta chave em repositórios públicos ou canais inseguros."[cite: 1]
+
+---
+
+### US-13 - Gestão de Perfis e Permissões de Usuários
+
+**Como** administrador, **quero** definir os cargos e limites de acesso de cada membro da equipe, **para** garantir a segregação de funções e impedir que usuários sem atribuição alterem configurações ou publiquem dados indevidos[cite: 1].
+
+#### 1. Regras de negócio detalhadas:
+* O sistema deve aplicar controle de acesso baseado em papéis (RBAC) com **5 perfis formais**[cite: 1, 2]:
+  * **Operador de Dados:** Acesso restrito a cadastro de fontes (US-01), envio para Zona Bruta (US-02), conferência da quarentena (US-03) e acompanhamento de esteira (US-04)[cite: 1, 2].
+  * **Analista Territorial:** Acesso a cálculos de sobreposição (US-06), mapas interativos (US-08) e catálogo de dados (US-09)[cite: 1, 2].
+  * **Auditor Ambiental:** Acesso exclusivo de visualização à linhagem retrospectiva (US-05) e logs de auditoria[cite: 1, 2].
+  * **Gestor de Dados:** Permissão para homologar e congelar safras de indicadores (US-07), comparativos temporais (US-10) e exportação de laudos (US-11)[cite: 1, 2].
+  * **Administrador:** Gestão de usuários, alteração de permissões, revogação de credenciais e parâmetros globais do sistema[cite: 1, 2].
+* **Autenticação Obrigatória:** Nenhuma rota da API ou tela da aplicação pode ser acessada sem token autenticado válido.
+* **Trava Administrativa:** O sistema não deve permitir que o último usuário Administrador ativo tenha seu perfil rebaixado ou inativado.
+
+#### 2. Dados a armazenar definidos (tipos e validações):
+* **ID Usuário:** UUID / `NUMBER`, chave primária.
+* **Nome Completo:** `VARCHAR2(150)`, obrigatório, mínimo 3 caracteres.
+* **E-mail Corporativo:** `VARCHAR2(150)`, formato de e-mail válido, único, obrigatório.
+* **Hash Senha:** `VARCHAR2(255)`, criptografia forte (BCrypt), obrigatório.
+* **Perfil de Acesso (Role):** lista (`ROLE_OPERADOR`, `ROLE_ANALISTA`, `ROLE_AUDITOR`, `ROLE_GESTOR`, `ROLE_ADMIN`), obrigatório[cite: 1, 2].
+* **Status Conta:** lista (`ATIVO`, `INATIVO`, `BLOQUEADO`), obrigatório.
+* **Data Cadastro:** `TIMESTAMP`, preenchimento automático.
+* **Data Último Acesso:** `TIMESTAMP`, atualizado a cada autenticação com sucesso.
+
+#### 3. Mensagens de confirmação, erro e aviso:
+* **Confirmação:**
+  * "Usuário [Nome] cadastrado com sucesso sob o perfil [Perfil]."[cite: 1]
+  * "Permissões de acesso atualizadas para o colaborador [Nome]."[cite: 1]
+* **Erro:**
+  * "Acesso negado: Seu perfil não possui autorização para executar esta ação."[cite: 1]
+  * "Não é possível inativar o único usuário Administrador do sistema."
+  * "Já existe um usuário cadastrado com este e-mail corporativo."
+* **Aviso:**
+  * "A alteração de perfil terá efeito imediato sobre os privilégios da sessão do colaborador."[cite: 1]
