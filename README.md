@@ -77,14 +77,14 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
     <tr>
       <td>3</td>
       <td>Alta</td>
-      <td>Como <strong>operador de dados</strong>, quero <strong>um filtro que desvie registros inconsistentes para quarentena</strong> para barrar geometrias quebradas ou dados duplicados antes que eles cheguem na base tratada.</td>
+      <td>Como <strong>operador de dados</strong>, quero <strong>ver o andamento das etapas da carga na tela</strong> para saber rapidamente em qual passo o processamento está e onde deu erro se a execução falhar.</td>
       <td>8</td>
       <td>1</td>
     </tr>
     <tr>
       <td>4</td>
       <td>Alta</td>
-      <td>Como <strong>operador de dados</strong>, quero <strong>ver o andamento das etapas da carga na tela</strong> para saber rapidamente em qual passo o processamento está e onde deu erro se a execução falhar.</td>
+      <td>Como <strong>operador de dados</strong>, quero <strong>um filtro que desvie registros inconsistentes para quarentena</strong> para barrar geometrias quebradas ou dados duplicados antes que eles cheguem na base tratada.</td>
       <td>8</td>
       <td>1</td>
     </tr>

@@ -1,0 +1,167 @@
+<h2 id="dod">🏆 Definition of Done (DoD)</h2>
+
+### 📌 Sprint 1 
+
+<table>
+  <thead>
+    <tr>
+      <th align="left" width="30%">Critério</th>
+      <th align="left">Descrição</th>
+      <th align="center" width="10%">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Código pronto e funcional</strong></td>
+      <td>A funcionalidade foi codificada de ponta a ponta e atende aos critérios de aceitação combinados.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Padrão de commits no Git</strong></td>
+      <td>Commits organizados no repositório seguindo mensagens semânticas convencionais.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Isolamento em branches</strong></td>
+      <td>Cada história desenvolvida em sua branch de funcionalidade específica.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Revisão por Pull Request</strong></td>
+      <td>Código revisado e validado por outro desenvolvedor do time antes do merge na branch de desenvolvimento.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Integridade do arquivo garantida</strong></td>
+      <td>Arquivos originais armazenados de forma imutável e retidos na Zona Bruta para auditoria técnica.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Desvio de quarentena operando</strong></td>
+      <td>Registros que apresentarem erro estrutural ou geométrico segregados com o motivo do erro registrado.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Orquestração de pipeline</strong></td>
+      <td>DAGs do Apache Airflow configuradas e integradas para execução automatizada das etapas de carga.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Bateria de testes aprovada</strong></td>
+      <td>Testes unitários e manuais de ponta a ponta executados sem erros impeditivos.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Documentação atualizada</strong></td>
+      <td>READMEs e especificações técnicas de endpoints e esquemas salvas no repositório.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Demonstração realizada</strong></td>
+      <td>Incremento funcional demonstrado em funcionamento durante a Sprint Review.</td>
+      <td align="center">🟡</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+### 📌 Sprint 2 
+
+<table>
+  <thead>
+    <tr>
+      <th align="left" width="30%">Critério</th>
+      <th align="left">Descrição</th>
+      <th align="center" width="10%">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Linhagem de dados homologada</strong></td>
+      <td>Árvore de linhagem permitindo rastrear o indicador até o arquivo bruto original de entrada.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Rotinas espaciais validadas</strong></td>
+      <td>Procedures em PL/SQL executando cruzamentos de CAR contra Alertas e APPs com cálculo de sobreposição em hectares.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Imutabilidade de versões</strong></td>
+      <td>Mecanismo de congelamento de safras implementado no banco impedindo alterações posteriores em versões oficiais.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Visualização em mapa interativo</strong></td>
+      <td>Camadas cartográficas renderizadas via Leaflet com alternância de layers e popups informativos.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Testes de precisão analítica</strong></td>
+      <td>Métricas calculadas validadas contra ferramentas SIG de referência para assegurar consistência geométrica.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Controle de versão e PR</strong></td>
+      <td>Branches de cruzamento espacial e visualização revisadas e integradas na develop via Pull Request.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Demonstração do incremento</strong></td>
+      <td>Apresentação do mapa interativo e da consulta de linhagem executada na Sprint Review.</td>
+      <td align="center">🟡</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+### 📌 Sprint 3
+
+<table>
+  <thead>
+    <tr>
+      <th align="left" width="30%">Critério</th>
+      <th align="left">Descrição</th>
+      <th align="center" width="10%">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Catálogo operacional ativo</strong></td>
+      <td>Interface e endpoint disponibilizando a listagem consolidada de todas as bases e suas respectivas situações.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Comparativo temporal funcional</strong></td>
+      <td>Módulo de comparação gráfica entre safras operando na tela sem inconsistências de cálculo.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Exportação estruturada homologada</strong></td>
+      <td>Geração de relatórios nos formatos CSV e GeoJSON operando com integridade a partir da Zona Publicada.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Autenticação por API Key</strong></td>
+      <td>Módulo de chaves de integração operando com exibição única de token e funcionalidade de cancelamento imediato.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Segregação por RBAC</strong></td>
+      <td>Controle de acesso por papéis (Operador, Analista, Auditor, Gestor e Administrador) validado em rotas de backend e telas.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Homologação final da documentação</strong></td>
+      <td>Documentação de Swagger, manuais de execução local e artefatos de entrega 100% atualizados na main.</td>
+      <td align="center">🟡</td>
+    </tr>
+    <tr>
+      <td><strong>Demonstração final do produto</strong></td>
+      <td>Apresentação do GeoRural DataHub completo operando de ponta a ponta com entrega do vídeo de MVP.</td>
+      <td align="center">🟡</td>
+    </tr>
+  </tbody>
+</table>bash git config --global user.email "seu_email@exemplo.com"

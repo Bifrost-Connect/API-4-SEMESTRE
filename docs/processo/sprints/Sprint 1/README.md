@@ -75,18 +75,18 @@
     <tr>
       <td align="center">3</td>
       <td align="center">Alta</td>
+      <td>Como <strong>operador de dados</strong>, quero <strong>ver o andamento das etapas da carga na tela</strong> para saber rapidamente em qual passo o processamento está e onde deu erro se a execução falhar.</td>
+      <td align="center">8</td>
+      <td align="center">1</td>
+      <td align="center">🟡</td>
+       <tr>
+      <td align="center">4</td>
+      <td align="center">Alta</td>
       <td>Como <strong>operador de dados</strong>, quero <strong>um filtro que desvie registros inconsistentes para quarentena</strong> para barrar geometrias quebradas ou dados duplicados antes que eles cheguem na base tratada.</td>
       <td align="center">8</td>
       <td align="center">1</td>
       <td align="center">🟡</td>
     </tr>
-    <tr>
-      <td align="center">4</td>
-      <td align="center">Alta</td>
-      <td>Como <strong>operador de dados</strong>, quero <strong>ver o andamento das etapas da carga na tela</strong> para saber rapidamente em qual passo o processamento está e onde deu erro se a execução falhar.</td>
-      <td align="center">8</td>
-      <td align="center">1</td>
-      <td align="center">🟡</td>
     </tr>
   </tbody>
 </table>
