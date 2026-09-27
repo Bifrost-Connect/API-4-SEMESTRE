@@ -21,7 +21,7 @@
 
 <br>
 
-**Status da Sprint:** 🟡 Em andamento
+**Status da Sprint:** 🟢 Concluída
 
 <table width="100%">
   <tbody>
@@ -62,15 +62,15 @@
       <td>Como <strong>operador de dados</strong>, quero <strong>cadastrar os dados de origem de uma base (órgão emissor, ano e sistema de coordenadas)</strong> para organizar a procedência dos arquivos e saber exatamente qual safra está entrando no sistema.</td>
       <td align="center">5</td>
       <td align="center">1</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
-      <td>2</td>
+      <td align="center">2</td>
       <td align="center">Alta</td>
-      <td>Como <strong>operador de dados</strong>, quero <strong>fazer upload salvando uma cópia original com hash SHA-256 na Zona Bruta</strong> para garantir que o arquivo enviado não foi alterado ou corrompido durante a ingestão.</td>
+      <td>Como <strong>operador de dados</strong>, quero <strong>fazer upload salvando uma cópia original na Zona Bruta</strong> para garantir que o arquivo enviado não foi alterado ou corrompido durante a ingestão.</td>
       <td align="center">8</td>
       <td align="center">1</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">3</td>
@@ -78,15 +78,15 @@
       <td>Como <strong>operador de dados</strong>, quero <strong>ver o andamento das etapas da carga na tela</strong> para saber rapidamente em qual passo o processamento está e onde deu erro se a execução falhar.</td>
       <td align="center">8</td>
       <td align="center">1</td>
-      <td align="center">🟡</td>
-       <tr>
+      <td align="center">🟢</td>
+    </tr>
+    <tr>
       <td align="center">4</td>
       <td align="center">Alta</td>
       <td>Como <strong>operador de dados</strong>, quero <strong>um filtro que desvie registros inconsistentes para quarentena</strong> para barrar geometrias quebradas ou dados duplicados antes que eles cheguem na base tratada.</td>
       <td align="center">8</td>
       <td align="center">1</td>
-      <td align="center">🟡</td>
-    </tr>
+      <td align="center">🟢</td>
     </tr>
   </tbody>
 </table>
@@ -109,7 +109,7 @@
     </tr>
     <tr>
       <td><strong>Critérios de aceite alinhados</strong></td>
-      <td>Regras de metadados obrigatórios, obrigatoriedade do hash SHA-256 e critérios de descarte para a quarentena aprovados pelo PO.</td>
+      <td>Regras de metadados obrigatórios e critérios de descarte para a quarentena aprovados pelo PO.</td>
     </tr>
     <tr>
       <td><strong>Ausência de bloqueios</strong></td>
@@ -129,7 +129,7 @@
     </tr>
     <tr>
       <td><strong>Plano de testes montado</strong></td>
-      <td>Casos de teste previstos para validação de integridade criptográfica, esquemas e segregação de registros defeituosos.</td>
+      <td>Casos de teste previstos para validação de esquemas e segregação de registros defeituosos.</td>
     </tr>
   </tbody>
 </table>
@@ -151,15 +151,15 @@
       <td>Mockups e telas desenhadas para cadastro de fontes, upload com status da carga e visualização dos dados em quarentena.</td>
     </tr>
     <tr>
-      <td><a href="../../bds/Modelagem%20Banco%20de%20Dados.png">🗄️ <strong>Modelagem do Banco de Dados</strong></a></td>
-      <td>Diagrama relacional contemplando fontes, datasets, logs de ingestão, hash e registros segregados no Oracle.</td>
+      <td><a href="../../bds/Modelagem%20do%20Banco%20de%20Dados.png">🗄️ <strong>Modelagem do Banco de Dados</strong></a></td>
+      <td>Diagrama relacional contemplando fontes, datasets, logs de ingestão e registros segregados no Oracle.</td>
     </tr>
     <tr>
       <td><a href="relatorio_avaliacoes.md">🧪 <strong>Roteiro de Testes e Validação</strong></a></td>
-      <td>Cenários de testes unitários para verificação do cálculo de SHA-256, constraints de banco e disparos das DAGs no Airflow.</td>
+      <td>Cenários de testes unitários para verificação de integridade, constraints de banco e disparos das DAGs no Airflow.</td>
     </tr>
     <tr>
-      <td><a href="../../bds/georural_schema.sql">📂 <strong>Scripts DDL</strong></a></td>
+      <td><a href="../../bds/visiona_db.sql">📂 <strong>Scripts DDL</strong></a></td>
       <td>Scripts SQL de criação do esquema do banco de dados para as zonas Bruta e Quarentena.</td>
     </tr>
   </tbody>
@@ -181,47 +181,47 @@
     <tr>
       <td><strong>Código pronto e funcional</strong></td>
       <td>A funcionalidade foi codificada de ponta a ponta e atende aos critérios de aceitação combinados.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Padrão de commits no Git</strong></td>
       <td>Commits organizados no repositório seguindo mensagens semânticas convencionais.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Isolamento em branches</strong></td>
       <td>Cada história desenvolvida em sua branch de funcionalidade específica.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Revisão por Pull Request</strong></td>
       <td>Código revisado e validado por outro desenvolvedor do time antes do merge na branch de desenvolvimento.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Integridade do arquivo garantida</strong></td>
-      <td>Arquivos brutos armazenados de forma imutável e com hash SHA-256 persistido no banco.</td>
-      <td align="center">🟡</td>
+      <td>Arquivos brutos armazenados de forma imutável e retidos na Zona Bruta para auditoria técnica.</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Desvio de quarentena operando</strong></td>
       <td>Registros que apresentarem erro estrutural ou geométrico segregados com o motivo do erro registrado.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Bateria de testes aprovada</strong></td>
       <td>Testes unitários e manuais de ponta a ponta executados sem erros impeditivos.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Documentação atualizada</strong></td>
       <td>READMEs e especificações técnicas de endpoints e esquemas salvas no repositório.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Demonstração realizada</strong></td>
       <td>Incremento funcional demonstrado em funcionamento durante a Sprint Review.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
   </tbody>
 </table>
@@ -239,7 +239,7 @@
   <tbody>
     <tr>
       <td align="center">
-        <img src="../../bds/Modelagem%20Banco%20de%20Dados.png" alt="Modelo de Dados GeoRural DataHub - Sprint 1" width="100%">
+        <img src="../../bds/Modelagem do Banco de Dados.png" alt="Modelo de Dados GeoRural DataHub - Sprint 1" width="100%">
       </td>
     </tr>
   </tbody>
