@@ -147,7 +147,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="../../../Prot%C3%B3tipo%20da%20Aplica%C3%A7%C3%A3o">🖼️ <strong>Protótipos e Telas</strong></a></td>
+      <td><a href="../../wireframe das telas/Telas">🖼️ <strong>Protótipos e Telas</strong></a></td>
       <td>Mockups e telas desenhadas para cadastro de fontes, upload com status da carga e visualização dos dados em quarentena.</td>
     </tr>
     <tr>
@@ -155,7 +155,7 @@
       <td>Diagrama relacional contemplando fontes, datasets, logs de ingestão e registros segregados no Oracle.</td>
     </tr>
     <tr>
-      <td><a href="relatorio_avaliacoes.md">🧪 <strong>Roteiro de Testes e Validação</strong></a></td>
+      <td><a href="Protótipo de Aplicações.md">🧪 <strong>Roteiro de Testes e Validação</strong></a></td>
       <td>Cenários de testes unitários para verificação de integridade, constraints de banco e disparos das DAGs no Airflow.</td>
     </tr>
     <tr>
@@ -257,7 +257,9 @@
   </thead>
   <tbody>
     <tr>
-      <td>O vídeo demonstrando o pipeline da Sprint 1 em execução será incluído aqui após o término das entregas e validação com o cliente.</td>
+      <td> <a href="https://www.youtube.com/watch?v=xn_i7paCd-Y" target="_blank">
+        <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Badge" /> </a> 
+      </td>
     </tr>
   </tbody>
 </table>
