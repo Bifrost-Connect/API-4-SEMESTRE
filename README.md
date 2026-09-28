@@ -28,6 +28,11 @@
     <td><strong>Status do Projeto:</strong></td>
     <td>🟡 Em andamento</td>
   </tr>
+  <tr>
+    <td><strong>MVP</strong></td>
+    <td> <a href="https://www.youtube.com/watch?v=xn_i7paCd-Y" target="_blank">
+        <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Badge" /> </a> 
+    </td>
 </table>
 
 <br>
@@ -427,7 +432,7 @@ georural-datahub/
     </tr>
     <tr>
       <td colspan="2" align="center">
-        🔗 <strong><a href="https://www.notion.so/33ba656f7280808fa1cee382273beaac?v=33ba656f72808016929d000c07903970">Acessar quadro no Notion</a></strong>
+        🔗 <strong><a href="https://app.notion.com/p/3c9ec6b3be5880fd9cebd2551626aabf?v=3c9ec6b3be588022b68c000c26ddcda0">Acessar quadro no Notion</a></strong>
       </td>
     </tr>
   </tbody>
