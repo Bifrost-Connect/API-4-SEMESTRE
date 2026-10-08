@@ -128,7 +128,7 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
       <td>Média</td>
       <td>Como <strong>analista de dados</strong>, quero <strong>um catálogo com todas as bases carregadas e o status de cada uma</strong> para achar rápido quais dados estão prontos e disponíveis para consulta.</td>
       <td>5</td>
-      <td>3</td>
+      <td>2</td>
     </tr>
     <tr>
       <td>10</td>
