@@ -17,6 +17,7 @@
 <a href="#tecnologias">💻 Tecnologias</a> | 
 <a href="#sprints">📌 Cronograma de Sprints</a> | 
 <a href="#manual-instalacao">📘 Manual de Instalação</a> | 
+<a href="#manual-do-usuario">📘 Manual do Usuário</a> | 
 <a href="#membros">👥 Membros</a>
 
 </div>
@@ -313,6 +314,34 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
 
 <br>
 
+<h2 id="manual-do-usuario">📖 Manual do Usuário</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Conteúdo Abordado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Guia prático para navegação e utilização da aplicação:
+        <ul>
+          <li><strong>Primeiros Passos:</strong> Cadastro, login e fluxo inicial no sistema.</li>
+          <li><strong>Funcionalidades Principais:</strong> Passo a passo detalhado para o uso dos recursos da aplicação.</li>
+          <li><strong>Dúvidas Frequentes (FAQ):</strong> Resolução de problemas comuns e boas práticas de uso.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        🔗 <strong><a href="./docs/processo/non-functional requirements">Acessar Manual do Usuário Completo</a></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
 <h3>🌳 Estrutura de Branches</h3>
 
 <table>
@@ -399,14 +428,14 @@ georural-datahub/
 
 | Foto | Nome | Função no Projeto | GitHub | LinkedIn |
 | :--: | :--: | :---------------: | :----: | :------: |
+| <img src="https://avatars.githubusercontent.com/u/202870969?s=64&v=4" width="50px"> | Ana França | Desenvolvedora | <a href="https://github.com/orgs/Bifrost-Connect/people/ana-franca-01"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joao-gabriel-fernandes-de-sousa-silva-292b9a2bb) |
 | <img src="https://avatars.githubusercontent.com/u/73396751?s=400&v=4" width="50px"> | Daniel Natan | Product Owner | <a href="https://github.com/danieldanka"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/daniel-natan-francisco-055a2b199/) |
-| <img src="https://avatars.githubusercontent.com/u/184759398?v=4" width="50px"> | Leonardo Graciano | Scrum Master | <a href="https://github.com/LeonardoGracianoOliveira"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leonardo-oliveira-5734382ba) |
 | <img src="https://avatars.githubusercontent.com/u/180232646?v=4" width="50px"> | Guilherme Gomes | Desenvolvedor | <a href="https://github.com/guilhermegcris"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guilherme-gomes-crisostomo/) |
-| <img src="https://avatars.githubusercontent.com/u/202870969?s=64&v=4" width="50px"> | Ana França | Desenvolvedor | <a href="https://github.com/orgs/Bifrost-Connect/people/ana-franca-01"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joao-gabriel-fernandes-de-sousa-silva-292b9a2bb) |
+| <img src="https://avatars.githubusercontent.com/u/98664551?v=4" width="50px"> | João Vinícius | Desenvolvedor | <a href="https://github.com/joaosantos13"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
 | <img src="https://avatars.githubusercontent.com/u/179888153?v=4" width="50px"> | Luan Santos | Desenvolvedor | <a href="https://github.com/SantoszLuan"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luansantoosz/) |
+| <img src="https://avatars.githubusercontent.com/u/184759398?v=4" width="50px"> | Leonardo Graciano | Scrum Master | <a href="https://github.com/LeonardoGracianoOliveira"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leonardo-oliveira-5734382ba) |
 | <img src="https://avatars.githubusercontent.com/u/162627331?v=4" width="50px"> | Niuan Souza | Desenvolvedor | <a href="https://github.com/NiuanSouza"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/niuansouza) |
 | <img src="https://avatars.githubusercontent.com/u/206007960?v=4" width="50px"> | Vitor Samuel | Desenvolvedor | <a href="https://github.com/VitorRibeiro09"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
-| <img src="https://avatars.githubusercontent.com/u/98664551?v=4" width="50px"> | João Vinícius | Desenvolvedor | <a href="https://github.com/joaosantos13"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
 
 <br>
 
