@@ -403,7 +403,7 @@ georural-datahub/
 | <img src="https://avatars.githubusercontent.com/u/184759398?v=4" width="50px"> | Leonardo Graciano | Scrum Master | <a href="https://github.com/LeonardoGracianoOliveira"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leonardo-oliveira-5734382ba) |
 | <img src="https://avatars.githubusercontent.com/u/180232646?v=4" width="50px"> | Guilherme Gomes | Desenvolvedor | <a href="https://github.com/guilhermegcris"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guilherme-gomes-crisostomo/) |
 | <img src="https://avatars.githubusercontent.com/u/202870969?s=64&v=4" width="50px"> | Ana França | Desenvolvedor | <a href="https://github.com/orgs/Bifrost-Connect/people/ana-franca-01"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joao-gabriel-fernandes-de-sousa-silva-292b9a2bb) |
-| <img src="https://avatars.githubusercontent.com/u/179888153?v=4" width="50px"> | Luan | Desenvolvedor | <a href="https://github.com/SantoszLuan"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luansantoosz/) |
+| <img src="https://avatars.githubusercontent.com/u/179888153?v=4" width="50px"> | Luan Santos | Desenvolvedor | <a href="https://github.com/SantoszLuan"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luansantoosz/) |
 | <img src="https://avatars.githubusercontent.com/u/162627331?v=4" width="50px"> | Niuan Souza | Desenvolvedor | <a href="https://github.com/NiuanSouza"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/niuansouza) |
 | <img src="https://avatars.githubusercontent.com/u/206007960?v=4" width="50px"> | Vitor Samuel | Desenvolvedor | <a href="https://github.com/VitorRibeiro09"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
 | <img src="https://avatars.githubusercontent.com/u/98664551?v=4" width="50px"> | João Vinícius | Desenvolvedor | <a href="https://github.com/joaosantos13"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
@@ -420,19 +420,21 @@ georural-datahub/
   </thead>
   <tbody>
     <tr>
-      <td><img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white" alt="Notion Badge"></td>
       <td>
-        O time utiliza o Notion para acompanhar as entregas e a evolução das Sprints:
+        <img src="https://img.shields.io/badge/GitHub%20Projects-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Projects Badge">
+      </td>
+      <td>
+        O time utiliza o <strong>GitHub Projects</strong> integrado ao repositório para gerenciar entregas e acompanhar o progresso das Sprints:
         <ul>
-          <li><strong>Backlog do Produto:</strong> Priorização das histórias das 3 Sprints.</li>
-          <li><strong>Quadro Kanban:</strong> Divisão das tarefas técnicas entre backend, frontend e banco de dados.</li>
-          <li><strong>Critérios de Aceite:</strong> Acompanhamento do que está pronto para desenvolvimento (DoR) e pronto para entrega (DoD).</li>
+          <li><strong>Backlog e Milestones:</strong> Mapeamento de Issues e planejamento das metas de cada Sprint.</li>
+          <li><strong>Visão de Quadro (Board / Kanban):</strong> Acompanhamento das tarefas técnicas divididas por status e áreas (frontend, backend e banco de dados).</li>
+          <li><strong>Critérios e Rastreabilidade:</strong> Definição de DoR (Definition of Ready) e DoD (Definition of Done) diretamente nas Issues e Pull Requests.</li>
         </ul>
       </td>
     </tr>
     <tr>
       <td colspan="2" align="center">
-        🔗 <strong><a href="https://app.notion.com/p/3c9ec6b3be5880fd9cebd2551626aabf?v=3c9ec6b3be588022b68c000c26ddcda0">Acessar quadro no Notion</a></strong>
+        🔗 <strong><a href="https://github.com/orgs/Bifrost-Connect/projects/2/views/1">Acessar GitHub Projects da Equipe</a></strong>
       </td>
     </tr>
   </tbody>
