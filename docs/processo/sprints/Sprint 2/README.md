@@ -21,7 +21,7 @@
 
 <br>
 
-**Status da Sprint:** 🟡 Em andamento
+**Status da Sprint:** 🟢 Concluída
 
 <table width="100%">
   <tbody>
@@ -31,7 +31,7 @@
     </tr>
     <tr>
       <td><strong>Meta da Sprint</strong></td>
-      <td>Conclusão da Quarentena (US-04 remanejada), cruzamento analítico, linhagem, imutabilidade, mapa e catálogo de dados (US 4, 5, 6, 7, 8 e 9).</td>
+      <td>Conclusão da Quarentena (US-04 remanejada), cruzamento analítico, linhagem, imutabilidade, mapa e catálogo de dados (US 4, 5, 6, 7, e 8).</td>
     </tr>
     <tr>
       <td><strong>Período</strong></td>
@@ -62,7 +62,7 @@
       <td>Como <strong>operador de dados</strong>, quero <strong>um filtro que desvie registros inconsistentes para quarentena</strong> para barrar geometrias quebradas ou dados duplicados antes que eles cheguem na base tratada.</td>
       <td align="center">8</td>
       <td align="center">2</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">5</td>
@@ -70,7 +70,7 @@
       <td>Como <strong>auditor ambiental</strong>, quero <strong>consultar a linhagem de um indicador até o arquivo bruto de origem</strong> para responder auditorias externas comprovando quais versões e regras geraram o cálculo.</td>
       <td align="center">13</td>
       <td align="center">2</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">6</td>
@@ -78,7 +78,7 @@
       <td>Como <strong>analista territorial</strong>, quero <strong>calcular automaticamente a sobreposição entre imóveis rurais (CAR) e áreas com alertas ambientais</strong> para eliminar a morosidade e as falhas do cálculo manual em laudos de regularidade.</td>
       <td align="center">13</td>
       <td align="center">2</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">7</td>
@@ -86,7 +86,7 @@
       <td>Como <strong>gestor de dados</strong>, quero <strong>fechar e proteger versões oficiais de indicadores impedindo edições</strong> para assegurar que relatórios e laudos emitidos possam ser reconstituídos fielmente a qualquer momento.</td>
       <td align="center">8</td>
       <td align="center">2</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">8</td>
@@ -94,7 +94,7 @@
       <td>Como <strong>analista territorial</strong>, quero <strong>ver o traçado dos imóveis e alertas sobrepostos em um mapa interativo</strong> para inspecionar anomalias geográficas sem depender de softwares desktop pesados.</td>
       <td align="center">8</td>
       <td align="center">2</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">9</td>
@@ -167,7 +167,7 @@
       <td>Mockups e telas desenhadas para mapa interativo Leaflet, árvore de linhagem do dado, catálogo de bases e gestão de versões de safras.</td>
     </tr>
     <tr>
-      <td><a href="../../bds/Modelagem%20do%20Banco%20de%20Dados.png">🗄️ <strong>Modelagem do Banco de Dados</strong></a></td>
+      <td><a href="Diagrama Banco de Dados.jpeg">🗄️ <strong>Modelagem do Banco de Dados</strong></a></td>
       <td>Diagrama relacional com entidades de ocorrência de validação, processamento espacial, indicadores, catálogo e auditoria.</td>
     </tr>
     <tr>
@@ -197,42 +197,42 @@
     <tr>
       <td><strong>Linhagem de dados homologada</strong></td>
       <td>Árvore de linhagem permitindo rastrear o indicador até o arquivo bruto original de entrada.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Rotinas espaciais validadas</strong></td>
       <td>Procedures em PL/SQL executando cruzamentos de CAR contra Alertas e APPs com cálculo de sobreposição em hectares.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Imutabilidade de versões</strong></td>
       <td>Mecanismo de congelamento de safras implementado no banco impedindo alterações posteriores em versões oficiais.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Visualização em mapa interativo</strong></td>
       <td>Camadas cartográficas renderizadas via Leaflet com alternância de layers e popups informativos.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Catálogo operacional ativo</strong></td>
       <td>Interface e endpoint disponibilizando a listagem consolidada de todas as bases e suas respectivas situações.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Testes de precisão analítica</strong></td>
       <td>Métricas calculadas validadas contra ferramentas SIG de referência para assegurar consistência geométrica.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Controle de versão e PR</strong></td>
       <td>Branches de cruzamento espacial, visualização e catálogo revisadas e integradas na develop via Pull Request.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Demonstração realizada</strong></td>
       <td>Incremento funcional do mapa, catálogo e rotinas espaciais demonstrado em funcionamento durante a Sprint Review.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
   </tbody>
 </table>
@@ -244,13 +244,13 @@
 <table width="100%">
   <thead>
     <tr>
-      <th align="center">Diagrama Entidade-Relacionamento (Sprint 2)</th>
+      <th align="center">Diagrama Entidade-Relacionamento (Sprint 1)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td align="center">
-        <img>
+        <img src="Diagrama Banco de Dados.jpeg" alt="Modelo de Dados GeoRural DataHub - Sprint 1" width="100%">
       </td>
     </tr>
   </tbody>
@@ -268,7 +268,9 @@
   </thead>
   <tbody>
     <tr>
-      <td>O vídeo demonstrando as funcionalidades da Sprint 2 em execução será incluído aqui após o término das entregas e validação com o cliente.</td>
+      <td> <a href="https://youtu.be/YIhigo3PZdg" target="_blank">
+        <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Badge" /> </a> 
+      </td>
     </tr>
   </tbody>
 </table>
