@@ -241,7 +241,7 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
 <br>
 
 <h2 id="manual-instalacao">📘 Manual de Instalação e Execução</h2>
-🔗 <strong><a href="./docs/executavel">Acessar Manual do Usuário Completo</a></strong>
+🔗 <strong><a href="./docs/executavel">Acessar os executaveis</a></strong>
 
 Este diretório contém o executável autossuficiente (standalone) do Frontend do GeodataHub para Linux.
 
