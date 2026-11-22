@@ -21,7 +21,7 @@
 
 <br>
 
-**Status da Sprint:** 🟡 Em andamento
+**Status da Sprint:** 🟢 Concluída
 
 <table width="100%">
   <tbody>
@@ -62,7 +62,7 @@
       <td>Como <strong>analista territorial</strong>, quero <strong>comparar duas safras de dados de uma mesma região lado a lado</strong> para acompanhar a evolução temporal de irregularidades ambientais e concessão de crédito verde.</td>
       <td align="center">8</td>
       <td align="center">3</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">11</td>
@@ -70,7 +70,7 @@
       <td>Como <strong>gestor ambiental</strong>, quero <strong>baixar os resultados em planilhas (CSV) ou arquivos de mapa (GeoJSON)</strong> para compartilhar dados consolidados com auditorias externas e plataformas de BI parceiras.</td>
       <td align="center">5</td>
       <td align="center">3</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">12</td>
@@ -78,7 +78,7 @@
       <td>Como <strong>analista ou integrador externo</strong>, quero <strong>gerar chaves de acesso com opção de cancelamento imediato</strong> para integrar aplicações de forma segura sem expor senhas individuais.</td>
       <td align="center">5</td>
       <td align="center">3</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td align="center">13</td>
@@ -86,7 +86,7 @@
       <td>Como <strong>administrador</strong>, quero <strong>definir os cargos e limites de acesso de cada membro da equipe</strong> para assegurar segregação de funções e evitar ações indevidas sobre o acervo.</td>
       <td align="center">3</td>
       <td align="center">3</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
   </tbody>
 </table>
@@ -107,37 +107,37 @@
     <tr>
       <td><strong>User Story definida</strong></td>
       <td>Histórias da Sprint 3 formatadas e focadas em catálogo unificado, comparação temporal, exportação analítica e controle de acesso (RBAC e API Keys).</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Critérios de aceite alinhados</strong></td>
       <td>Esquemas de exportação CSV (delimitador <code>;</code> e UTF-8), padrão GeoJSON (WGS 84 / SRID: 4326), regras de cálculo de variação entre safras e matriz de 5 perfis alinhados com o PO.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Ausência de bloqueios</strong></td>
       <td>Bases de safras anteriores e homologadas disponíveis no banco Oracle para viabilizar cálculos comparativos e extração de dados.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Compreensão do time</strong></td>
       <td>Equipe alinhada sobre integração com Vue Chart.js, interceptors do Spring Security para chaves <code>X-API-KEY</code> e streaming de arquivos pesados.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Estimativa consolidada</strong></td>
       <td>Histórias pontuadas em Story Points na escala Fibonacci, somando a capacidade prevista de 26 SP para o ciclo.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Apoio visual e protótipos</strong></td>
       <td>Wireframes da tela de Catálogo Geral, Comparação de Safras com gráficos, modais de Exportação e Painel Administrativo de Usuários e Chaves prontos.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Plano de testes montado</strong></td>
       <td>Cenários desenhados para validação de integridade nos arquivos exportados, precisão nas fórmulas de delta temporal e testes de segurança nas rotas autenticadas.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
   </tbody>
 </table>
@@ -159,7 +159,7 @@
       <td>Mockups e telas desenhadas para catálogo com filtros, painel com gráficos Chart.js, telas de exportação e gestão de credenciais.</td>
     </tr>
     <tr>
-      <td><a href="Diagrama Banco de Dados.jpeg">🗄️ <strong>Modelagem do Banco de Dados</strong></a></td>
+      <td><a href="diagrama_er_banco_atual.png">🗄️ <strong>Modelagem do Banco de Dados</strong></a></td>
       <td>Diagrama relacional contendo as estruturas de catálogo, histórico de exportações, chaves de API e controle de usuários e perfis (RBAC).</td>
     </tr>
     <tr>
@@ -189,37 +189,37 @@
     <tr>
       <td><strong>Catálogo operacional ativo</strong></td>
       <td>Interface e endpoint disponibilizando a listagem consolidada de todas as bases e suas respectivas situações operacionais.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Comparativo temporal funcional</strong></td>
       <td>Módulo de comparação gráfica entre safras operando na tela via Vue Chart.js calculando variações de área com precisão.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Exportação estruturada homologada</strong></td>
       <td>Geração e download de relatórios em CSV e GeoJSON operando com integridade a partir da Zona Publicada.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Autenticação por API Key</strong></td>
       <td>Módulo de chaves de integração operando com exibição única de token e funcionalidade de cancelamento imediato.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Segregação por RBAC</strong></td>
       <td>Controle de acesso por papéis (Operador, Analista, Auditor, Gestor e Administrador) validado em rotas de backend e telas.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Controle de versão e PR</strong></td>
       <td>Branches de catálogo, gráficos, exportação e autenticação revisadas e integradas na develop via Pull Request.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
     <tr>
       <td><strong>Demonstração final realizada</strong></td>
       <td>Apresentação do GeoRural DataHub completo operando de ponta a ponta com entrega do vídeo de MVP na Sprint Review.</td>
-      <td align="center">🟡</td>
+      <td align="center">🟢</td>
     </tr>
   </tbody>
 </table>
@@ -237,7 +237,7 @@
   <tbody>
     <tr>
       <td align="center">
-        <img src="Diagrama Banco de Dados.jpeg" alt="Modelo de Dados GeoRural DataHub - Sprint 3" width="100%">
+        <img src="diagrama_er_banco_atual.png" alt="Modelo de Dados GeoRural DataHub - Sprint 3" width="100%">
       </td>
     </tr>
   </tbody>
@@ -255,7 +255,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>O vídeo demonstrativo com as funcionalidades da Sprint 3 em execução será incluído aqui após o término das entregas e validação com o cliente Visiona.</td>
+      <td>Todas as funcionalidades da Sprint 3 foram concluídas, demonstradas e homologadas na Sprint Review junto ao cliente Visiona.</td>
     </tr>
   </tbody>
 </table>
