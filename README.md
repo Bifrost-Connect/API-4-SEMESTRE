@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <td><strong>MVP</strong></td>
-    <td> <a href="https://youtu.be/YIhigo3PZdg" target="_blank">
+    <td> <a href="https://youtu.be/bSZsNCiGuvQ" target="_blank">
         <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Badge" /> </a> 
     </td>
 </table>
