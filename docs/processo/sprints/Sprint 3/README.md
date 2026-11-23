@@ -255,6 +255,15 @@
   </thead>
   <tbody>
     <tr>
+      <td> <a href="https://youtu.be/bSZsNCiGuvQ" target="_blank">
+        <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Badge" /> </a> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </thead>
+  <tbody>
+    <tr>
       <td>Todas as funcionalidades da Sprint 3 foram concluídas, demonstradas e homologadas na Sprint Review junto ao cliente Visiona.</td>
     </tr>
   </tbody>
