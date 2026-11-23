@@ -261,3 +261,191 @@ Edite ou crie o arquivo `.env` na mesma pasta do executável:
 PORT=3000
 HOST=0.0.0.0
 VITE_API_BASE_URL=http://localhost:8080
+
+### 2. Iniciar o Executável
+Basta executar o binário no terminal:
+
+```bash
+./frontend
+```
+
+Acesse no navegador: **http://localhost:3000**
+
+---
+
+## Opções de Linha de Comando
+
+| Opção | Descrição | Exemplo |
+|---|---|---|
+| `-p, --port <porta>` | Define a porta HTTP (sobrescreve o .env) | `./frontend -p 8080` |
+| `-h, --host <ip>` | Define a interface de rede | `./frontend -h 127.0.0.1` |
+| `-e, --env <caminho>` | Especifica um arquivo .env personalizado | `./frontend --env /etc/app.env` |
+| `-d, --dist <pasta>` | Permite sobrescrever os arquivos estáticos por uma pasta em disco | `./frontend -d ./minha-dist` |
+| `-v, --version` | Exibe a versão | `./frontend -v` |
+| `--help` | Exibe a ajuda detalhada | `./frontend --help` |
+
+---
+
+## Ordem de Prioridade do .env
+1. Caminho passado explicitamente via flag `--env <arquivo>`
+2. Arquivo `.env` no diretório onde o comando foi chamado (`./.env`)
+3. Arquivo `.env` na mesma pasta do executável (`<pasta_do_binario>/.env`)
+4. Variáveis de ambiente do sistema operacional (`export VITE_API_BASE_URL=...`)
+
+<br>
+
+<h2 id="manual-do-usuario">📖 Manual do Usuário</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Conteúdo Abordado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Guia prático para navegação e utilização da aplicação:
+        <ul>
+          <li><strong>Primeiros Passos:</strong> Cadastro, login e fluxo inicial no sistema.</li>
+          <li><strong>Funcionalidades Principais:</strong> Passo a passo detalhado para o uso dos recursos da aplicação.</li>
+          <li><strong>Dúvidas Frequentes (FAQ):</strong> Resolução de problemas comuns e boas práticas de uso.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        🔗 <strong><a href="./docs/processo/non-functional requirements">Acessar Manual do Usuário Completo</a></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<h3>🌳 Estrutura de Branches</h3>
+
+<table>
+  <tr>
+    <td><strong>main</strong></td>
+    <td>Versão estável das entregas de final de Sprint.</td>
+  </tr>
+  <tr>
+    <td><strong>develop</strong></td>
+    <td>Branch de integração dos desenvolvimentos em andamento.</td>
+  </tr>
+  <tr>
+    <td><strong>feature/*</strong></td>
+    <td>Branches pontuais para desenvolvimento de cada User Story (ex: <code>feature/us02-ingestao-bruta</code>).</td>
+  </tr>
+  <tr>
+    <td><strong>bugfix/*</strong></td>
+    <td>Correções rápidas de problemas encontrados em testes.</td>
+  </tr>
+</table>
+
+<br>
+
+<h3>📦 Organização de Pastas</h3>
+
+<pre>
+georural-datahub/
+ ├── backend/            # Código Java/Spring Boot (Controllers, Services, Repositories)
+ ├── frontend/           # Aplicação Vue.js (Telas, Componentes de Mapa e Gráficos)
+ ├── database/           # Scripts DDL, DML e procedures PL/SQL para o Oracle
+ ├── airflow/            # DAGs de ingestão e orquestração do pipeline
+ └── docs/               # Documentações, DoR, DoD e diagramas de modelagem
+</pre>
+
+<br>
+
+<h3 id="execucao">🚀 Como Rodar Localmente</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Etapa</th>
+      <th>Serviço</th>
+      <th>Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. Clonar</strong></td>
+      <td>Repositório</td>
+      <td><code>git clone https://github.com/SEU_USUARIO/GeoRural-DataHub.git</code><br><code>cd GeoRural-DataHub</code></td>
+    </tr>
+    <tr>
+      <td><strong>2. Infraestrutura</strong></td>
+      <td>Airflow & Storage</td>
+      <td><code>cd airflow && docker compose up -d</code></td>
+    </tr>
+    <tr>
+      <td><strong>3. Banco</strong></td>
+      <td>Oracle Database</td>
+      <td>Executar scripts SQL da pasta <code>/database/scripts/</code> no Oracle.</td>
+    </tr>
+    <tr>
+      <td><strong>4. Backend</strong></td>
+      <td>Spring Boot</td>
+      <td><code>cd backend && mvn clean spring-boot:run</code><br>Swagger: <code>http://localhost:8080/swagger-ui.html</code></td>
+    </tr>
+    <tr>
+      <td><strong>5. Frontend</strong></td>
+      <td>Vue.js</td>
+      <td><code>cd frontend && npm install && npm run dev</code><br>Aplicação: <code>http://localhost:5173</code></td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2> # 📝 Padrão de Commits </h2>
+<img src="docs/img/commit_structure.png">
+
+---
+
+<h2 id="membros">👥 Membros da Equipe</h2>
+
+| Foto | Nome | Função no Projeto | GitHub | LinkedIn |
+| :--: | :--: | :---------------: | :----: | :------: |
+| <img src="https://avatars.githubusercontent.com/u/202870969?s=64&v=4" width="50px"> | Ana França | Desenvolvedora | <a href="https://github.com/orgs/Bifrost-Connect/people/ana-franca-01"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joao-gabriel-fernandes-de-sousa-silva-292b9a2bb) |
+| <img src="https://avatars.githubusercontent.com/u/73396751?s=400&v=4" width="50px"> | Daniel Natan | Product Owner | <a href="https://github.com/danieldanka"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/daniel-natan-francisco-055a2b199/) |
+| <img src="https://avatars.githubusercontent.com/u/180232646?v=4" width="50px"> | Guilherme Gomes | Desenvolvedor | <a href="https://github.com/guilhermegcris"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guilherme-gomes-crisostomo/) |
+| <img src="https://avatars.githubusercontent.com/u/98664551?v=4" width="50px"> | João Vinícius | Desenvolvedor | <a href="https://github.com/joaosantos13"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
+| <img src="https://avatars.githubusercontent.com/u/179888153?v=4" width="50px"> | Luan Santos | Desenvolvedor | <a href="https://github.com/SantoszLuan"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luansantoosz/) |
+| <img src="https://avatars.githubusercontent.com/u/184759398?v=4" width="50px"> | Leonardo Graciano | Scrum Master | <a href="https://github.com/LeonardoGracianoOliveira"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leonardo-oliveira-5734382ba) |
+| <img src="https://avatars.githubusercontent.com/u/162627331?v=4" width="50px"> | Niuan Souza | Desenvolvedor | <a href="https://github.com/NiuanSouza"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/niuansouza) |
+| <img src="https://avatars.githubusercontent.com/u/206007960?v=4" width="50px"> | Vitor Samuel | Desenvolvedor | <a href="https://github.com/VitorRibeiro09"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitor-samuel-ribeiro-de-souza-917138351) |
+
+<br>
+
+<h2 id="gestao">📋 Gestão do Projeto</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Ferramenta</th>
+      <th>Organização das Atividades</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="https://img.shields.io/badge/GitHub%20Projects-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Projects Badge">
+      </td>
+      <td>
+        O time utiliza o <strong>GitHub Projects</strong> integrado ao repositório para gerenciar entregas e acompanhar o progresso das Sprints:
+        <ul>
+          <li><strong>Backlog e Milestones:</strong> Mapeamento de Issues e planejamento das metas de cada Sprint.</li>
+          <li><strong>Visão de Quadro (Board / Kanban):</strong> Acompanhamento das tarefas técnicas divididas por status e áreas (frontend, backend e banco de dados).</li>
+          <li><strong>Critérios e Rastreabilidade:</strong> Definição de DoR (Definition of Ready) e DoD (Definition of Done) diretamente nas Issues e Pull Requests.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        🔗 <strong><a href="https://github.com/orgs/Bifrost-Connect/projects/2/views/1">Acessar GitHub Projects da Equipe</a></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
