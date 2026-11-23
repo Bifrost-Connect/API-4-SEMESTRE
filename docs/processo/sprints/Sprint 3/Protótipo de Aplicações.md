@@ -68,4 +68,4 @@ Ao validar a ingestão do CAR em um banco zerado, foi identificado que a publica
 
 Confira a execução das funcionalidades da Sprint 3 rodando na aplicação, da ingestão do CAR até o consumo externo por chave de API:
 
-[![YouTube Badge]( )]( )
+[![YouTube Badge](https://img.shields.io/badge/YouTube-Assistir%20demonstra%C3%A7%C3%A3o-red?logo=youtube)](https://youtu.be/bSZsNCiGuvQ)
