@@ -175,7 +175,7 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
   <tbody>
     <tr>
       <td>Regras de negócio, especificação das 4 zonas do DataLake, wireframes e critérios de prontidão.</td>
-      <td><a href="docs\processo\DoR\DoR Backlog do Produto">🔍 Acessar Detalhamento (DoR)</a></td>
+      <td><a href="docs/processo/DoR/DoR%20Backlog%20do%20Produto.md">🔍 Acessar Detalhamento (DoR)</a></td>
     </tr>
   </tbody>
 </table>
@@ -193,7 +193,7 @@ Desenvolver o <strong>GeoRural DataHub</strong>, uma plataforma de dados espacia
   <tbody>
     <tr>
       <td>Testes unitários e de integração, scripts PL/SQL validados, DAGs homologadas e documentação OpenAPI.</td>
-      <td><a href="docs\processo\DoD\DoD Backlog do Produto">📊 Visualizar Evidências (DoD)</a></td>
+      <td><a href="docs/processo/DoD/Definition_of_Done.md">📊 Visualizar Evidências (DoD)</a></td>
     </tr>
   </tbody>
 </table>
